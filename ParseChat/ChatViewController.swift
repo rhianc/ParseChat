@@ -13,7 +13,6 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     @IBOutlet weak var messageField: UITextField!
     @IBOutlet weak var TableView: UITableView!
-    var timer: Timer?
     var messages: [PFObject] = []
     
     func onTimer() {
@@ -36,7 +35,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.onTimer), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.onTimer), userInfo: nil, repeats: true)
         TableView.delegate = self
         // Auto size row height based on cell autolayout constraints
         TableView.rowHeight = UITableViewAutomaticDimension
