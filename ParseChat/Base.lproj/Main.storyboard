@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -86,7 +85,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="530" y="36"/>
+            <point key="canvasLocation" x="527" y="37"/>
         </scene>
         <!--Chat-->
         <scene sceneID="awq-3M-uxG">
@@ -128,17 +127,17 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eqj-t1-e4c">
-                                                    <rect key="frame" x="16" y="16" width="327" height="11.5"/>
+                                                    <rect key="frame" x="8" y="8" width="327" height="27.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Eqj-t1-e4c" firstAttribute="trailing" secondItem="FHW-Ta-fAL" secondAttribute="trailingMargin" constant="8" id="R6s-Uy-bSl"/>
-                                                <constraint firstItem="Eqj-t1-e4c" firstAttribute="top" secondItem="FHW-Ta-fAL" secondAttribute="topMargin" constant="8" id="ig5-L5-iCg"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="Eqj-t1-e4c" secondAttribute="bottom" constant="8" id="sUb-yw-H4G"/>
-                                                <constraint firstItem="Eqj-t1-e4c" firstAttribute="leading" secondItem="FHW-Ta-fAL" secondAttribute="leadingMargin" constant="8" id="tFx-lH-qip"/>
+                                                <constraint firstAttribute="bottom" secondItem="Eqj-t1-e4c" secondAttribute="bottom" constant="8" id="0Ej-4J-iIX"/>
+                                                <constraint firstItem="Eqj-t1-e4c" firstAttribute="top" secondItem="FHW-Ta-fAL" secondAttribute="top" constant="8" id="5By-NN-4aH"/>
+                                                <constraint firstAttribute="trailing" secondItem="Eqj-t1-e4c" secondAttribute="trailing" constant="8" id="Dc9-WJ-EwU"/>
+                                                <constraint firstItem="Eqj-t1-e4c" firstAttribute="leading" secondItem="FHW-Ta-fAL" secondAttribute="leading" constant="8" id="r4M-9o-ctW"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -149,6 +148,10 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="9rH-PT-IsJ" appends="YES" id="bjS-9f-EiQ"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Chat" id="Bqr-6U-ugC"/>
                     <connections>
@@ -157,8 +160,13 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bjr-2R-tYI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="9rH-PT-IsJ">
+                    <connections>
+                        <action selector="tapped:" destination="mUd-wx-Rfk" id="KaU-lC-o3x"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2264.8000000000002" y="35.532233883058474"/>
+            <point key="canvasLocation" x="2265" y="37"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Isd-KZ-mAC">

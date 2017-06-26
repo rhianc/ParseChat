@@ -13,7 +13,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     @IBOutlet weak var messageField: UITextField!
     @IBOutlet weak var TableView: UITableView!
-    var timer: Timer
+    var timer: Timer?
     var messages: [PFObject] = []
     
     func onTimer() {
@@ -23,7 +23,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         query.findObjectsInBackground() {
             (post: [PFObject]!, error: Error?) -> Void in
             if error == nil{
-                print(post)
+                //print(post)
                 self.messages = post
                 self.TableView.reloadData()
             } else {
@@ -35,12 +35,14 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.onTimer), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.onTimer), userInfo: nil, repeats: true)
         TableView.delegate = self
         // Auto size row height based on cell autolayout constraints
         TableView.rowHeight = UITableViewAutomaticDimension
         // Provide an estimated row height. Used for calculating scroll indicator
         TableView.estimatedRowHeight = 50
+        TableView.dataSource = self
+        onTimer()
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,6 +51,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     @IBAction func hitSend(_ sender: Any) {
+        view.endEditing(true)
         let chatMessage = PFObject(className: "Message_fbu2017")
         chatMessage["text"] = messageField.text ?? ""
         chatMessage.saveInBackground { (success, error) in
@@ -72,11 +75,18 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-        
+        let cell = TableView.dequeueReusableCell(withIdentifier: "ChatCell", for: indexPath) as! ChatCellTableViewCell
+        let object = self.messages[indexPath.row]
+        let message = object["text"] as! String
+        print(message)
+        cell.label.text = message
+        return cell
+    }
+
+    @IBAction func tapped(_ sender: UITapGestureRecognizer) {
+        view.endEditing(true)
     }
     
-    
-
     /*
     // MARK: - Navigation
 
