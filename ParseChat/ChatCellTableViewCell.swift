@@ -11,11 +11,13 @@ import UIKit
 class ChatCellTableViewCell: UITableViewCell {
 
     @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var usernameLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         label.text = ""
+        usernameLabel.text = "🤖"
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

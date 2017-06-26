@@ -20,6 +20,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // Add code to be run periodically
         let query = PFQuery(className: "Message_fbu2017")
         query.addDescendingOrder("createdAt")
+        query.includeKey("user")
         query.findObjectsInBackground() {
             (post: [PFObject]!, error: Error?) -> Void in
             if error == nil{
@@ -52,8 +53,10 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @IBAction func hitSend(_ sender: Any) {
         view.endEditing(true)
+        let user = PFUser.current()
         let chatMessage = PFObject(className: "Message_fbu2017")
         chatMessage["text"] = messageField.text ?? ""
+        chatMessage["user"] = user
         chatMessage.saveInBackground { (success, error) in
             if success {
                 print("The message was saved!")
@@ -77,8 +80,11 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = TableView.dequeueReusableCell(withIdentifier: "ChatCell", for: indexPath) as! ChatCellTableViewCell
         let object = self.messages[indexPath.row]
-        let message = object["text"] as! String
-        print(message)
+        var message = object["text"] as! String
+        if let user = object["user"] as? PFUser{
+            let username = user.username as! String
+            cell.usernameLabel.text = username
+        }
         cell.label.text = message
         return cell
     }
