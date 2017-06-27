@@ -14,13 +14,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         Parse.initialize(with: ParseClientConfiguration(block: { (configuration) in
             configuration.applicationId = "parseChatID"
             configuration.server = "https://blooming-thicket-89345.herokuapp.com/parse"
         }))
+        if let currentUser = PFUser.current() {
+            print("Welcome back \(currentUser.username!) 😀")
+            // TODO: Load Chat view controller and set as root view controller
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let chatViewController = storyboard.instantiateViewController(withIdentifier: "ChatNavigationController")
+            window?.rootViewController = chatViewController
+        }
         return true
     }
 

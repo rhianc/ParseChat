@@ -79,9 +79,9 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = TableView.dequeueReusableCell(withIdentifier: "ChatCell", for: indexPath) as! ChatCellTableViewCell
         let object = self.messages[indexPath.row]
-        var message = object["text"] as! String
+        let message = object["text"] as! String
         if let user = object["user"] as? PFUser{
-            let username = user.username as! String
+            let username = user.username!
             cell.usernameLabel.text = username
         }
         cell.label.text = message
